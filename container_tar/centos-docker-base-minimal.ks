@@ -22,7 +22,7 @@ rootpw --lock --iscrypted locked
 
 keyboard us
 network --bootproto=dhcp --device=link --activate --onboot=on
-reboot
+shutdown
 
 zerombr
 clearpart --all
