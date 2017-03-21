@@ -24,7 +24,7 @@ yum -y install ${INSTALL_PKGS2};
 # If enable and start libvirtd
 systemctl enable libvirtd && systemctl start libvirtd;
 
-virt-install --name ${VM_DOMAIN} --memory 4096 --vcpus 1,cpuset=auto \
+virt-install --name ${VM_DOMAIN} --noreboot --memory 4096 --vcpus 1,cpuset=auto \
      --disk size=2,sparse=no,format=raw --network network=${VM_NETWORK} \
      --graphics=none --console pty,target_type=serial \
      --location ${CENTOS_INSTALL_SOURCE_URL} --extra-args "console=ttyS0,115200n8 serial ks=${KS_FILE_URL}";
