@@ -22,7 +22,7 @@ yum -y install ${INSTALL_PKGS1};
 yum -y install ${INSTALL_PKGS2};
 
 # If enable and start libvirtd
-systemctl enable --now libvirtd;
+systemctl enable libvirtd && systemctl start libvirtd;
 
 virt-install --name ${VM_DOMAIN} --memory 4096 --vcpus 1,cpuset=auto \
      --disk size=2,sparse=no,format=raw --network network=${VM_NETWORK} \
