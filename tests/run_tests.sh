@@ -36,4 +36,8 @@ do
   log "[${test_name}] Completed test" "${result}"
 done
 
+# clean up after tests
+log "Deleting ${IMAGE_NAME}"
+docker rmi -f ${IMAGE_NAME} || :
+
 exit ${EXIT_CODE}
