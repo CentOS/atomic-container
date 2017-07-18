@@ -4,15 +4,8 @@
 # dnf configuration in order to enable other languages.
 #
 ###  Hacking on this image ###
-# This kickstart is processed using Anaconda-in-ImageFactory (via Koji typically),
-# but you can run imagefactory locally too.
-#
-# To do so, testing local changes, first you'll need a TDL file.  I store one here:
-# https://git.fedorahosted.org/cgit/fedora-atomic.git/tree/fedora-atomic-rawhide.tdl
-# Just copy paste for multiple entries
-#
-# Then, once you have imagefactory and imagefactory-plugins installed, run:
-#
+# We assume this runs on a CentOS Linux 7/x86_64 machine, with virt ( or nested virt ) 
+# enabled, use the build.sh script to build your own for testing
 
 # text don't use cmdline -- https://github.com/rhinstaller/anaconda/issues/931
 cmdline
