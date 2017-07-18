@@ -1,18 +1,39 @@
 #!/bin/bash
-
 set -e
 
-cat centos_atomic.tar | docker import - justbuilt/atomic
+TEST_DIR="$(readlink -f "$(dirname "${BASH_SOURCE}")")"
+IMAGE_TAR="$(readlink -f "$(dirname ${TEST_DIR})")/centos_atomic.tar"
+IMAGE_NAME=build/centos-atomic:${RANDOM}
 
-root_dir=`pwd`
+function log() {
+  echo "[$(date)][${2:-INFO }] $1"
+}
 
-for t in `find . -type d -maxdepth 0 `; do 
-  cd ${t}
-  if [ -e Dockerfile ]; then
-    docker build -t justbuilt/${t} .
-    if [ -e test.sh ]; then
-      bash test.sh
-    fi
-  fi
-  cd ${root_dir}
+function error() {
+  echo 2>&1 "[ERROR] $1"
+  exit 1
+}
+
+[[ -f "${IMAGE_TAR}" ]] || error "Image layer tarball not found at ${IMAGE_TAR}"
+
+log "Importing ${IMAGE_TAR} as ${IMAGE_NAME}"
+{ cat "${IMAGE_TAR}" | docker import - ${IMAGE_NAME}; } \
+  || error "Failed to import image"
+
+EXIT_CODE=0
+
+for t in `find ${TEST_DIR} -mindepth 1 -maxdepth 1 -type d`;
+do
+  test_name=$(basename ${t})
+  log "[${test_name}] Executing test"
+  run_script="${t}/run.sh"
+  [[ -f "${run_script}" ]] || {
+    log "[${test_name}] ${run_script} not found" "SKIP ";
+    continue;
+  }
+  { bash ${run_script} ${IMAGE_NAME} && result="PASS "; } \
+    || { EXIT_CODE=1; result="FAIL "; }
+  log "[${test_name}] Completed test" "${result}"
 done
+
+exit ${EXIT_CODE}
