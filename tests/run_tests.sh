@@ -2,7 +2,8 @@
 set -e
 
 TEST_DIR="$(readlink -f "$(dirname "${BASH_SOURCE}")")"
-IMAGE_TAR="$(readlink -f "$(dirname ${TEST_DIR})")/centos_atomic.tar"
+IMAGE_TAR_NAME="${IMAGE_TAR_NAME:-centos_atomic.tar}"
+IMAGE_TAR="${1:-$(readlink -f "$(dirname ${TEST_DIR})")/${IMAGE_TAR_NAME}}"
 IMAGE_NAME=build/centos-atomic:${RANDOM}
 
 function log() {
