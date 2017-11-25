@@ -4,4 +4,4 @@ set -e
 
 DIR="$(readlink -f "$(dirname "$BASH_SOURCE")")"
 docker run --rm -i --entrypoint bash \
-	local/centos-atomic <${DIR}/shellshock_test.sh
+	$1 <${DIR}/shellshock_test.sh
