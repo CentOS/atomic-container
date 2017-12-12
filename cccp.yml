@@ -8,4 +8,4 @@
 # * https://wiki.centos.org/ContainerPipeline
 
 # This will be part of the name of the container. It should match the job-id in index entry
-job-id: centos-atomic
+job-id: atomic-centos
