@@ -10,7 +10,7 @@ fi
 
 # Initialize variables
 INSTALL_PKGS1="libvirt-*";
-INSTALL_PKGS2="virt-install libguestfs";
+INSTALL_PKGS2="virt-install libguestfs libguestfs-tools-c";
 KS_FILE_URL="https://raw.githubusercontent.com/kbsingh/atomic-container/master/centos-atomic-container.ks";
 CENTOS_INSTALL_SOURCE_URL=${CENTOS_INSTALL_SOURCE_URL-"http://mirror.centos.org/centos/7/os/x86_64"};
 VM_DOMAIN=${VM_DOMAIN-"centos_atomic_image"};
