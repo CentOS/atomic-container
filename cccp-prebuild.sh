@@ -3,7 +3,7 @@
 set -eux;
 
 DOCKERFILE="Dockerfile";
-export IMAGE_TAR_NAME="centos_atomic.tar";
+export IMAGE_TAR_NAME="centos_atomic.tar.gz";
 
 bash build.sh
 cat >${DOCKERFILE} <<EOF
